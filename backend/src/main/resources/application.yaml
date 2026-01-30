@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: Ascendia
+  datasource:
+    url: jdbc:postgresql://db:5432/ascendia_db
+    username: ascendia
+    password: ascendia
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      jakarta.persistence.jdbc.url: jdbc:postgresql://db:5432/ascendia_db
+  sql:
+    init:
+      platform: postgres
