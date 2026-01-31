@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+
 import static jakarta.persistence.FetchType.LAZY;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,6 +28,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "mentor_profiles")
+@EntityListeners(AuditingEntityListener.class)
 public class MentorProfile {
     @Id
     @GeneratedValue(strategy=GenerationType.UUID)

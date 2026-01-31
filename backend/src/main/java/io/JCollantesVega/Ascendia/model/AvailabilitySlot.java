@@ -3,7 +3,10 @@ package io.JCollantesVega.Ascendia.model;
 import java.time.LocalTime;
 import java.util.UUID;
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,6 +25,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "availability_slots")
+@EntityListeners(AuditingEntityListener.class)
 public class AvailabilitySlot {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
