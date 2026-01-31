@@ -58,3 +58,5 @@ docker-compose up --build
 
 ## 🛡️ Seguridad y API
 El backend implementa Spring Security para proteger los endpoints. Las peticiones desde el frontend están configuradas para manejar la autenticación (ej. JWT) y el intercambio de recursos de origen cruzado (CORS).
+
+Desarrollado por José Antonio Collantes
