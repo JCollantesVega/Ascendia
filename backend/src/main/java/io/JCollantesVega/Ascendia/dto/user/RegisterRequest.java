@@ -2,6 +2,7 @@ package io.JCollantesVega.Ascendia.dto.user;
 
 import io.JCollantesVega.Ascendia.Enum.Role;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 
 public record RegisterRequest (
@@ -11,7 +12,7 @@ public record RegisterRequest (
     String email,
     @NotBlank(message = "Password is required")
     String password,
-    @NotBlank(message = "Role is required")
+    @NotNull(message = "Role is required")
     Role role,
 
     String avatarUrl
