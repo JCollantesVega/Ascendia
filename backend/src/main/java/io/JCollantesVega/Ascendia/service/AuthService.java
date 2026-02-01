@@ -49,9 +49,6 @@ public class AuthService {
         // Generar el token
         String token = jwtService.generateToken(user);
 
-        // Imprimir el token para comprobar que se ha creado
-        System.out.println("Token: " + token);
-
         // Devolver el token
         return new AuthResponse(token, user.getUsername(), user.getEmail(), user.getRole());
     }
