@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.JCollantesVega.Ascendia.dto.user.RegisterRequest;
+import io.JCollantesVega.Ascendia.dto.user.register.RegisterRequest;
 import io.JCollantesVega.Ascendia.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
