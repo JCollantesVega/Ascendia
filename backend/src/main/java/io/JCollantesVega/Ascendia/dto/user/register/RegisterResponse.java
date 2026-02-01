@@ -1,4 +1,4 @@
-package io.JCollantesVega.Ascendia.dto.user;
+package io.JCollantesVega.Ascendia.dto.user.register;
 
 import io.JCollantesVega.Ascendia.Enum.Role;
 

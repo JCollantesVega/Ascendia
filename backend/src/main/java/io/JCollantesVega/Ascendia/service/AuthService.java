@@ -1,11 +1,16 @@
 package io.JCollantesVega.Ascendia.service;
 
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import io.JCollantesVega.Ascendia.Repository.UserRepository;
-import io.JCollantesVega.Ascendia.dto.user.RegisterRequest;
+import io.JCollantesVega.Ascendia.dto.user.auth.AuthRequest;
+import io.JCollantesVega.Ascendia.dto.user.auth.AuthResponse;
+import io.JCollantesVega.Ascendia.dto.user.register.RegisterRequest;
 import io.JCollantesVega.Ascendia.model.User;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -13,7 +18,8 @@ import lombok.RequiredArgsConstructor;
 public class AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    //private final JwtService jwtService;
+    private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
 
     public void register(RegisterRequest request) {
         if(userRepository.findByEmail(request.getEmail()).isPresent()){
@@ -28,5 +34,22 @@ public class AuthService {
         user.setAvatarUrl(request.getAvatarUrl());
         
         userRepository.save(user);
+    }
+
+    public AuthResponse login(AuthRequest request) {
+        // Autenticar al usuario
+        authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
+        );
+
+        // Obtener el usuario
+        User user = userRepository.findByEmail(request.getEmail())
+            .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        // Generar el token
+        String token = jwtService.generateToken(user);
+
+        // Devolver el token
+        return new AuthResponse(token, user.getUsername(), user.getEmail(), user.getRole());
     }
 }
