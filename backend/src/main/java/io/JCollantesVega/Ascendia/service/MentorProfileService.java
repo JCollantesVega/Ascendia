@@ -13,6 +13,7 @@ import io.JCollantesVega.Ascendia.Repository.MentorProfileRepository;
 import io.JCollantesVega.Ascendia.Repository.UserRepository;
 import io.JCollantesVega.Ascendia.dto.mentorProfile.MentorProfileRequest;
 import io.JCollantesVega.Ascendia.dto.mentorProfile.MentorProfileResponse;
+import io.JCollantesVega.Ascendia.mapper.MentorProfileMapper;
 import io.JCollantesVega.Ascendia.model.MentorProfile;
 import io.JCollantesVega.Ascendia.model.User;
 import jakarta.persistence.EntityNotFoundException;
@@ -24,6 +25,7 @@ public class MentorProfileService {
 
     private final MentorProfileRepository mentorProfileRepository;
     private final UserRepository userRepository;
+    private final MentorProfileMapper mentorProfileMapper;
 
     @Transactional
     public MentorProfileResponse saveOrUpdateMentorProfile(MentorProfileRequest request) {
@@ -35,23 +37,19 @@ public class MentorProfileService {
         }
 
         MentorProfile profile = mentorProfileRepository.findByUserId(currentUser.getId())
-                .orElse(new MentorProfile());
+                .orElse(null);
 
-        profile.setBio(request.bio());
-        profile.setSpeciality(request.speciality());
-        profile.setPriceHour(request.priceHour());
-        profile.setTimezone(request.timezone());
-        profile.setUser(currentUser);
+        MentorProfile savedProfile;
+        if (profile == null) {
+            savedProfile = mentorProfileRepository.save(
+                mentorProfileMapper.createEntityFromRequest(request, currentUser)
+            );
+        } else {
+            mentorProfileMapper.updateEntityFromRequest(request, profile);
+            savedProfile = mentorProfileRepository.save(profile);
+        }
 
-        MentorProfile savedProfile = mentorProfileRepository.save(profile);
-
-        return new MentorProfileResponse(
-                savedProfile.getId(),
-                savedProfile.getBio(),
-                savedProfile.getSpeciality(),
-                savedProfile.getPriceHour(),
-                savedProfile.getTimezone()
-        );
+        return mentorProfileMapper.toResponse(savedProfile);
     }
 
     @Transactional(readOnly = true)
@@ -59,13 +57,7 @@ public class MentorProfileService {
         MentorProfile profile = mentorProfileRepository.findById(profileId)
                 .orElseThrow(() -> new EntityNotFoundException("Mentor profile not found with id: " + profileId));
 
-        return new MentorProfileResponse(
-                profile.getId(),
-                profile.getBio(),
-                profile.getSpeciality(),
-                profile.getPriceHour(),
-                profile.getTimezone()
-        );
+        return mentorProfileMapper.toResponse(profile);
     }
 
     @Transactional(readOnly = true)
@@ -80,13 +72,7 @@ public class MentorProfileService {
         MentorProfile profile = mentorProfileRepository.findByUserId(currentUser.getId())
                 .orElseThrow(() -> new EntityNotFoundException("Mentor profile not found for current user"));
 
-        return new MentorProfileResponse(
-                profile.getId(),
-                profile.getBio(),
-                profile.getSpeciality(),
-                profile.getPriceHour(),
-                profile.getTimezone()
-        );
+        return mentorProfileMapper.toResponse(profile);
     }
 
     @Transactional(readOnly = true)
@@ -101,12 +87,6 @@ public class MentorProfileService {
         MentorProfile profile = mentorProfileRepository.findByUserId(userId)
                 .orElseThrow(() -> new EntityNotFoundException("Mentor profile not found for user: " + userId));
 
-        return new MentorProfileResponse(
-                profile.getId(),
-                profile.getBio(),
-                profile.getSpeciality(),
-                profile.getPriceHour(),
-                profile.getTimezone()
-        );
+        return mentorProfileMapper.toResponse(profile);
     }
 }

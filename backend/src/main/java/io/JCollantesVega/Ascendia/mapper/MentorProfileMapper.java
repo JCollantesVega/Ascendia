@@ -1,36 +1,31 @@
 package io.JCollantesVega.Ascendia.mapper;
 
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.factory.Mappers;
+
 import io.JCollantesVega.Ascendia.dto.mentorProfile.MentorProfileRequest;
 import io.JCollantesVega.Ascendia.dto.mentorProfile.MentorProfileResponse;
 import io.JCollantesVega.Ascendia.model.MentorProfile;
 import io.JCollantesVega.Ascendia.model.User;
 
-public class MentorProfileMapper {
-
-    public static MentorProfileResponse toResponse(MentorProfile profile) {
-        return new MentorProfileResponse(
-            profile.getId(),
-            profile.getBio(),
-            profile.getSpeciality(),
-            profile.getPriceHour(),
-            profile.getTimezone()
-        );
-    }
-
-    public static void updateEntityFromRequest(MentorProfileRequest request, MentorProfile profile) {
-        profile.setBio(request.bio());
-        profile.setSpeciality(request.speciality());
-        profile.setPriceHour(request.priceHour());
-        profile.setTimezone(request.timezone());
-    }
-
-    public static MentorProfile createEntityFromRequest(MentorProfileRequest request, User user) {
-        MentorProfile profile = new MentorProfile();
-        profile.setBio(request.bio());
-        profile.setSpeciality(request.speciality());
-        profile.setPriceHour(request.priceHour());
-        profile.setTimezone(request.timezone());
-        profile.setUser(user);
-        return profile;
-    }
+@Mapper(componentModel = "spring")
+public interface MentorProfileMapper {
+    
+    MentorProfileMapper INSTANCE = Mappers.getMapper(MentorProfileMapper.class);
+    
+    MentorProfileResponse toResponse(MentorProfile profile);
+    
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "user", source = "user")
+    @Mapping(target = "availabilitySlots", ignore = true)
+    @Mapping(target = "bookings", ignore = true)
+    MentorProfile createEntityFromRequest(MentorProfileRequest request, User user);
+    
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "user", ignore = true)
+    @Mapping(target = "availabilitySlots", ignore = true)
+    @Mapping(target = "bookings", ignore = true)
+    void updateEntityFromRequest(MentorProfileRequest request, @MappingTarget MentorProfile profile);
 }
