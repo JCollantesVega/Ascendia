@@ -1,0 +1,77 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="logo-section">
+      <img src="/static/FullLogo.png" alt="Ascendia Logo" class="logo" />
+    </div>
+    
+    <div class="auth-form">
+      <h2>Create Account</h2>
+      <p class="subtitle">Join us today and get started</p>
+      
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input
+            type="text"
+            id="name"
+            [(ngModel)]="name"
+            name="name"
+            placeholder="Enter your full name"
+            required
+          />
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            [(ngModel)]="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+          />
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            [(ngModel)]="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+          />
+        </div>
+        
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            [(ngModel)]="confirmPassword"
+            name="confirmPassword"
+            placeholder="Confirm your password"
+            required
+          />
+        </div>
+        
+        <div class="error-message" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
+        
+        <button type="submit" class="auth-button" [disabled]="isLoading">
+          <span *ngIf="!isLoading">Sign Up</span>
+          <span *ngIf="isLoading" class="loading-spinner">Creating account...</span>
+        </button>
+      </form>
+      
+      <div class="auth-footer">
+        <p>Already have an account? 
+          <a (click)="navigateToLogin()" class="auth-link">Sign in</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
