@@ -9,6 +9,7 @@ import io.JCollantesVega.Ascendia.Repository.UserRepository;
 import io.JCollantesVega.Ascendia.dto.user.auth.AuthRequest;
 import io.JCollantesVega.Ascendia.dto.user.auth.AuthResponse;
 import io.JCollantesVega.Ascendia.dto.user.register.RegisterRequest;
+import io.JCollantesVega.Ascendia.mapper.AuthMapper;
 import io.JCollantesVega.Ascendia.model.User;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final AuthMapper authMapper;
 
     public void register(RegisterRequest request) {
         if(userRepository.findByEmail(request.getEmail()).isPresent()){
@@ -50,6 +52,6 @@ public class AuthService {
         String token = jwtService.generateToken(user);
 
         // Devolver el token
-        return new AuthResponse(token, user.getUsername(), user.getEmail(), user.getRole());
+        return authMapper.toAuthResponse(user, token);
     }
 }
