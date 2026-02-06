@@ -26,7 +26,7 @@ export interface AuthResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = '/v1/api/auth';
+  private apiUrl = '/api/v1/auth';
 
   constructor(private http: HttpClient) {}
 
