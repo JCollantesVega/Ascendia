@@ -4,18 +4,18 @@ import belfort from "../../../assets/belfort.jpg";
 export const mentorCards:MentorCardProps[] = [
     {
         name: "John",
-        speciality: "e-commerce",
+        speciality: ["e-commerce"],
         price: 50
     },
     {
         name: "Jordan Belfort",
         avatarUrl: belfort,
-        speciality: "Stocks, Trading",
+        speciality: ["Stocks", "Trading"],
         price: 60
     },
     {
         name: "Jorge",
-        speciality: "Individual growth, Personal Branding",
+        speciality: ["Individual growth", "Personal Branding"],
         price: 55
     }
 ]
