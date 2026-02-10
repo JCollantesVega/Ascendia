@@ -4,8 +4,15 @@ import DefaultUserPic from "../../../assets/defaultUserPic.jpg";
 const MentorCard = ({name, avatarUrl, speciality, price}: MentorCardProps) => {
     const imageSrc = avatarUrl || DefaultUserPic;
 
+    const handleCardClick = () => {
+        console.log(`Navegando al perfil de ${name}...`);
+    }
+
     return (
-        <div className="h-full border border-3 border-[#9ACCF1] backdrop-blur-xs rounded-4xl overflow-hidden max-w-xs font-cinzel text-[#0B5976]">
+        <div
+            onClick={handleCardClick}
+            className="h-full border border-3 border-[#9ACCF1] backdrop-blur-xs rounded-4xl overflow-hidden max-w-xs font-cinzel text-[#0B5976]
+                        cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]">
             <div className="h-full flex flex-col items-center">
                 <div className="max-w-[100%] ">
                     <img
