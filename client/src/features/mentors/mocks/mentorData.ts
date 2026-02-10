@@ -1,4 +1,5 @@
 import type { MentorCardProps } from "../../../types/mentor";
+import belfort from "../../../assets/belfort.jpg";
 
 export const mentorCards:MentorCardProps[] = [
     {
@@ -8,7 +9,8 @@ export const mentorCards:MentorCardProps[] = [
     },
     {
         name: "Jordan Belfort",
-        speciality: "Crypto, Trading",
+        avatarUrl: belfort,
+        speciality: "Stocks, Trading",
         price: 60
     },
     {
