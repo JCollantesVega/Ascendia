@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:16
+    container_name: ascendia_db
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: ascendia
+      POSTGRES_USER: ascendia
+      POSTGRES_DB: ascendia_db
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
