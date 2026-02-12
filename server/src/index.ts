@@ -1,6 +1,7 @@
 import express from "express";
 import cors from 'cors';
-import mentorRoutes from "./routes/mentor.routes.js";
+import mentorRoutes from "./routes/mentor.routes.ts";
+import 'dotenv/config';
 
 const app = express();
 

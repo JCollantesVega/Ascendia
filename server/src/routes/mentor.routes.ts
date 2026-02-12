@@ -1,6 +1,5 @@
 import { Router } from "express";
-import { getMentors } from "../controllers/mentor.controller.js";
-import { QuicEndpoint } from "node:quic";
+import { getMentors } from "../controllers/mentor.controller.ts";
 
 
 const router = Router();
