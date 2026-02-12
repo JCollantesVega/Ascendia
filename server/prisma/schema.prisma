@@ -1,0 +1,72 @@
+datasource db {
+    provider = "postgresql"
+    url = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+enum Role {
+    STUDENT
+    MENTOR
+    ADMIN
+}
+
+enum BookingStatus {
+    PENDING
+    CONFIRMED
+    CANCELLED
+    COMPLETED
+}
+
+model User {
+    id String @id @default(uuid())
+    username String @unique
+    email String @unique
+    password String
+    role Role @default(STUDENT)
+    avatarUrl String?
+    createdAt DateTime @default(now())
+
+    bookings Booking[] @relation("StudentBookings")
+
+    mentorProfile MentorProfile?
+}
+
+
+model MentorProfile {
+    id String @id @default(uuid())
+    bio String
+    specialities String[]
+    priceHour Float
+    timezone String
+
+    availabilities AvailabilitySlot[]
+    bookings Booking[]
+
+    userId String @unique
+    user User @relation(fields: [userId], references: [id])
+}
+
+model AvailabilitySlot{
+    id String @id @default(uuid())
+    startTime DateTime
+    endTime DateTime
+    isBooked Boolean @default(false)
+
+    mentorId String
+    mentor MentorProfile @relation(fields: [mentorId], references: [id])
+}
+
+model Booking {
+    id String @id @default(ulid())
+    createdAt DateTime @default(now())
+    status BookingStatus
+
+    studentId String
+    user User @relation("StudentBookings", fields: [studentId], references: [id])
+
+    mentorId String
+    mentor MentorProfile @relation(fields: [mentorId], references: [id])
+}
