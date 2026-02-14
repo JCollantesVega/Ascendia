@@ -1,21 +1,21 @@
-# Ascendia 🚀
+# Ascendia 
 
 **Ascendia** es una plataforma de mentoría profesional diseñada para conectar expertos con aprendices. Este proyecto nació como una transición desde un entorno Java/Spring hacia un ecosistema moderno **Fullstack TypeScript**.
 
-## 🏗️ Arquitectura y Stack
+## Arquitectura y Stack
 Este es un **Monorepo** que contiene tanto el cliente como el servidor:
 
 - **Frontend (`/client`):** React + Vite + Tailwind CSS + TypeScript.
 - **Backend (`/server`):** Node.js + Express (o NestJS) + TypeScript.
 - **Base de Datos:** PostgreSQL (gestionado con Prisma ORM).
 
-## 🎯 Motivación Técnica
+## Motivación Técnica
 El objetivo principal de este proyecto es aplicar principios de:
 - **Clean Code** y tipado estricto con TypeScript.
 - **Arquitectura basada en Features** en el frontend.
 - **Desarrollo de APIs REST** intuitivas y escalables.
 
-## 🛠️ Instalación y Uso
+## Instalación y Uso
 
 ### Prerrequisitos
 - Node.js (v18 o superior)
