@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Ascendia 
 
 **Ascendia** es una plataforma de mentoría profesional diseñada para conectar expertos con aprendices. Este proyecto nació como una transición desde un entorno Java/Spring hacia un ecosistema moderno **Fullstack TypeScript**.
@@ -42,3 +43,6 @@ cd ../server && npm install
 ---
 
 Proyecto desarrollado por Jose Collantes - Desarrollador de Aplicaciones Multiplataforma.
+=======
+# Ascendia
+>>>>>>> parent of 1fe0860 (Rename README.md)
