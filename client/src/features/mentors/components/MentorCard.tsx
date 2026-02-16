@@ -1,11 +1,14 @@
 import type { MentorCardProps } from "../../../types/mentor";
 import DefaultUserPic from "../../../assets/defaultUserPic.jpg";
+import { useNavigate } from "react-router";
 
-const MentorCard = ({name, avatarUrl, speciality, price}: MentorCardProps) => {
+const MentorCard = ({id, name, avatarUrl, speciality, price}: MentorCardProps) => {
     const imageSrc = avatarUrl || DefaultUserPic;
+    const navigate = useNavigate();
 
     const handleCardClick = () => {
         console.log(`Navegando al perfil de ${name}...`);
+        navigate(`/mentor/${id}`);
     }
 
     return (

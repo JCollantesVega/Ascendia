@@ -8,6 +8,7 @@ export interface MentorProfile{
 
 
 export interface MentorCardProps{
+    id: string;
     name: string;
     avatarUrl?: string;
     speciality: string[];
