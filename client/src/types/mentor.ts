@@ -8,6 +8,7 @@ export interface MentorProfile{
 
 
 export interface MentorCardProps{
+    id: string;
     name: string;
     avatarUrl?: string;
     speciality: string[];
@@ -16,4 +17,15 @@ export interface MentorCardProps{
 
 export interface MentorGridProps{
     mentors: MentorCardProps[];
+}
+
+export interface AvailabilitySlotProps{
+    slotId: string;
+    startTime: Date;
+    endTime: Date;
+    status: string;
+}
+
+export interface AvailabilityGridProps{
+    slots: AvailabilitySlotProps[];
 }

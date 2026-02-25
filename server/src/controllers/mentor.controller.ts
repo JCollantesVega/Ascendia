@@ -28,3 +28,42 @@ export const getMentors = async(req: Request, res: Response) => {
         res.status(500).json({error: "Error al obtener mentores"});
     }
 };
+
+
+export const getMentorById = async(req: Request, res:Response) => {
+    try{
+        const { id } = req.params;
+        
+        if(!id || typeof id !== "string")
+        {
+            return res.status(400).json({error: "ID no válido"})
+        };
+
+        const mentor = await prisma.mentorProfile.findFirst({
+            where: {
+                id: id,
+            },
+            include: {
+                user:{
+                    select:{
+                        username: true,
+                        avatarUrl: true,
+                    }
+                },
+                availabilities:{
+                    select:{
+                        id: true,
+                        startTime: true,
+                        endTime: true,
+                        isBooked: true,
+                    }
+                }
+            }
+        });
+
+
+        res.json(mentor);
+    }catch(error){
+        res.status(500).json({error: "Error al obtener el mentor"});
+    }
+};
